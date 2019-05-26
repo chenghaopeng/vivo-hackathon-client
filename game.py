@@ -47,6 +47,7 @@ def on_message(ws, message):
 def on_error(ws, error):
     print("Something Wrong Happened: ", end='.')
     print(error)
+    print("Please check your configuraion or network.")
     sys.exit(0)
 
 def on_close(ws):
@@ -54,6 +55,7 @@ def on_close(ws):
     sys.exit(0)
 
 def on_open(ws):
+    print("Connect successful.")
     print("Send prepare message to server.")
     ws_send(ws, "prepare", {})
     print("Waiting for server response.")
@@ -71,5 +73,4 @@ def main():
     print("Connecting to server " + URL + ".")
     ws = websocket.WebSocketApp(URL, on_message = on_message, on_error = on_error, on_close = on_close)
     ws.on_open = on_open
-    print("Connect successful.")
     ws.run_forever()
