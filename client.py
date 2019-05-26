@@ -28,15 +28,13 @@ class MyHttpHandler(BaseHTTPRequestHandler):
     
     def do_POST(self):
         global httpd
-        html = '<p class="title">Success!</p><p class="title">Please check in command line window.</p>'.encode("UTF-8")
+        html = '<p class="title">Success!</p><p class="title">Please check in command line window,</p><p class="title">and watch the game in the webbrowser.</p>'.encode("UTF-8")
         self.send_response(200)
         self.send_header('Content-type','text/html; charset=utf-8')
         self.send_header('Content-length', len(html))
         self.end_headers()
         self.wfile.write(html)
         data = urllib.parse.parse_qs(urllib.parse.unquote(str(self.rfile.readline(), 'UTF-8')))
-        # print(data)
-        # game.cfg = {'url': data['url'][0], 'token': data['token'][0], 'path': data['path'][0].replace("file://", "")}
         game.cfg = {'url': data['url'][0], 'path': data['path'][0].replace("file://", "")}
         game.main()
         sys.exit(0)

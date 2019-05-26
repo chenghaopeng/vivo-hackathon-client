@@ -62,10 +62,7 @@ def main():
 
     global cfg
     URL = cfg['url']
-    # TKN = cfg['token']
     PTH = cfg['path']
-
-    # print(URL+' '+TKN+' '+PTH)
 
     if not os.path.exists(PTH):
         print("AI application not exists.")

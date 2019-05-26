@@ -70,7 +70,6 @@
     <div id="main">
         <form method="post">
             <p class="title">Server URL with Token :</p><input id="url" type="text" autocomplete="off">
-            <!-- <p class="title">Your Token :</p><input id="token" type="text" autocomplete="off"> -->
             <p class="title">AI application path:</p><input id="path" type="text" autocomplete="off">
         </form>
         <p><button id="submit">Submit</button></p>
@@ -89,7 +88,6 @@
         $("#submit").click(function() {
             $("#main").children("p.error").remove();
             var strurl = $("#url").val().trim();
-            // var strtoken = $("#token").val().trim();
             var strpath = $("#path").val().trim();
             var mes = "";
             if(!isValidURL(strurl)) mes += '<p class="title error">Invalid Server URL!</p>';
