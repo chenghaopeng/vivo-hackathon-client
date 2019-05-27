@@ -4,10 +4,8 @@ import json
 import subprocess
 import os
 import websocket
-import time
 
 cfg = {}
-
 
 def is_json(str):
     try:
