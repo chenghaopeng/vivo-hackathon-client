@@ -127,6 +127,7 @@ httpd.serve_forever()
 sys.exit(0)
 
 
+
 # <!doctype html>
 # <html>
 
@@ -206,17 +207,22 @@ sys.exit(0)
 # <body>
 #     <div id="main">
 #         <form method="post">
-#             <p class="title">Server URL with Token :</p><input id="url" type="text" autocomplete="off">
+#             <p class="title">HostName:Port :</p><input id="ip" type="text" autocomplete="off">
+#             <p class="title">Token :</p><input id="token" type="text" autocomplete="off">
 #             <p class="title">AI application path:</p><input id="path" type="text" autocomplete="off">
 #         </form>
 #         <p><button id="submit">Submit</button></p>
 #     </div>
 
 #     <script>
-#         function isValidURL(url) {   
-#             var reg =  '^(ws:\/\/([a-zA-Z0-9]{1,}\.[a-zA-Z0-9]{1,}){1,}\.[a-zA-Z0-9]{1,}(:[0-9]{1,4})?\/*)$';
+#         function isValidIP(ip) {   
+#             var reg =  '^(([a-zA-Z0-9]{1,}\.[a-zA-Z0-9]{1,}){1,}\.[a-zA-Z0-9]{1,}(:[0-9]{1,4})?)$';
 #             var re = new RegExp(reg);
-#             return re.test(url);
+#             return re.test(ip);
+#         }
+#         function isValidToken(token) {
+#             if (token == "") return false;
+#             return true;
 #         }
 #         function isValidPath(path) {
 #             if (path == "") return false;
@@ -224,17 +230,19 @@ sys.exit(0)
 #         }
 #         $("#submit").click(function() {
 #             $("#main").children("p.error").remove();
-#             var strurl = $("#url").val().trim();
+#             var strip = $("#ip").val().trim();
+#             var strtoken = $("#token").val().trim();
 #             var strpath = $("#path").val().trim();
 #             var mes = "";
-#             if(!isValidURL(strurl)) mes += '<p class="title error">Invalid Server URL!</p>';
+#             if(!isValidIP(strip)) mes += '<p class="title error">Invalid HostName:Port!</p>';
+#             if(!isValidToken(strtoken)) mes += '<p class="title error">Invalid Token!</p>';
 #             if(!isValidPath(strpath)) mes += '<p class="title error">Invalid AI Application Path!</p>';
 #             if(mes == "") {
 #                 $.ajax({
 #                     url: ".",
 #                     type: "post",
 #                     data: {
-#                         url: strurl,
+#                         url: "ws://" + strip + "/client/" + strtoken,
 #                         path: strpath
 #                     },
 #                     success: function(data) {
